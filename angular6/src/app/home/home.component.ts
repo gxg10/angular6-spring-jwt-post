@@ -7,7 +7,6 @@ import { TokenStorageService } from '../auth/token-storage.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   info: any;
 
   constructor(private token: TokenStorageService) { }
@@ -16,8 +15,12 @@ export class HomeComponent implements OnInit {
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
-      authorities: this.token.getAuthorities
+      authorities: this.token.getAuthorities()
     };
   }
 
+  logout() {
+    this.token.signOut();
+    window.location.reload();
+  }
 }
